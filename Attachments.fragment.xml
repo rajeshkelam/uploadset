@@ -1,0 +1,36 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:upload="sap.m.upload">
+    <upload:UploadSet
+        id="idAttach"
+        showIcons="true"
+        uploadEnabled="true"
+        terminationEnabled="true"
+        uploadUrl="/sap/opu/odata/sap/ZPROCUREMENT_SRV/PR_AttachmentSet"
+        instantUpload="true"
+        items="{path: 'oModelAttach>/items' ,
+                                    parameters: {
+									    $orderby: 'oModelAttach>Erdat'
+							                	},
+                                    templateShareable: false
+                                }"
+        beforeUploadStarts="onBeforeUploadStarts"
+        uploadCompleted="onUploadComplete"
+    >
+        <upload:items>
+            <upload:UploadSetItem fileName="{oModelAttach>fileName}" 
+                                  visibleRemove="true" 
+                                  visibleEdit="false"
+                                  removePressed="onRemovePressed"
+                                  url="{oModelAttach>url}" 
+                                  mediaType="{oModelAttach>meddiaType}" 
+                                  uploadState="{oModelAttach>uploadState}">
+                <upload:attributes>
+                    <ObjectAttribute title="File Description" text="{oModelAttach>fileName}" />
+                </upload:attributes>
+                <upload:statuses>
+                    <ObjectStatus title="Uploaded By" text="{oModelAttach>CreatedBy}" />
+                    <ObjectStatus title="Uploaded On" text="{oModelAttach>Erdat}" />
+                </upload:statuses>
+            </upload:UploadSetItem>
+        </upload:items>
+    </upload:UploadSet>
+</core:FragmentDefinition>
